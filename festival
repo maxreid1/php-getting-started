@@ -1,0 +1,13 @@
+<?php
+if(isset($_GET['q']))
+  $q = urlencode($_GET[‘q’]);
+else
+  $q = 'sandvich';
+$response = file_get_contents('https://www.googleapis.com/customsearch/v1?q=coachella\&cx=006399907617376946976:l8mbsw4qom8&searchType=image&key=AIzaSyCOeav7qNUHAqblnVqpB1EJsSnJ5NTwOnM&num=1&fields=items%2Flink');
+
+$url = (((json_decode($response))->items)[0])->link;
+
+
+header('Content-type: image/png');
+echo file_get_contents($url);
+?>
